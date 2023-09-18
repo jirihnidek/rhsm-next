@@ -1,0 +1,29 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+        "https://specifications.freedesktop.org/dbus/introspect-latest.dtd">
+<node>
+    <!--
+    com.redhat.RHSM2.Unregister
+    @short_description: Unregister object interface
+
+    The com.redhat.RHSM2.Unregister exposes one method for unregistering system
+    -->
+    <interface name="com.redhat.RHSM2.Unregister">
+        <!--
+        Unregister
+        @locale: The string with locale
+        -->
+
+        <method name="Unregister">
+            <arg name="locale" direction="in" type="s"/>
+        </method>
+    </interface>
+
+    <!--
+    Interface for introspection of D-Bus API
+    -->
+    <interface name="org.freedesktop.DBus.Introspectable">
+        <method name="Introspect">
+            <arg name="out" direction="out" type="s"/>
+        </method>
+    </interface>
+</node>

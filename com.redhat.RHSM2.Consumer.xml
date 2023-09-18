@@ -1,0 +1,60 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+        "https://specifications.freedesktop.org/dbus/introspect-latest.dtd">
+<node>
+    <!--
+    com.redhat.RHSM2.Consumer
+    @short_description: Consumer object interface
+
+    The com.redhat.RHSM2.Consumer exposes methods providing information
+    about current user
+    -->
+    <interface name="com.redhat.RHSM2.Consumer">
+        <!--
+        GetUuid
+        @locale: The string with locale
+        @org_id: The UUID of consumer
+
+        When consumer certificate is installed, then UUID of
+        consumer is returned
+        -->
+        <method name="GetUuid">
+            <arg name="locale" direction="in" type="s" />
+            <arg name="UUID" direction="out" type="s" />
+        </method>
+
+        <!--
+        GetOrg
+        @locale: The string with locale
+        @org_id: The ID of organization
+
+        When consumer certificate is installed, then organization
+        ID is returned
+        -->
+        <method name="GetOrg">
+            <arg name="locale" direction="in" type="s" />
+            <arg name="org_id" direction="out" type="s" />
+        </method>
+
+        <!--
+        ConsumerChanged
+        @file_path: The path of file changed in the directory containing consumer cert & key
+        @event: The string representation of file event
+
+        Emitted, when file watcher notify some event in the directory
+        containing consumer certificate and key
+        -->
+        <signal name="ConsumerChanged">
+            <arg name="file_path" direction="out" type="s" />
+            <arg name="event" direction="out" type="s" />
+        </signal>
+    </interface>
+
+    <!--
+    Interface for introspection of D-Bus API
+    -->
+    <interface name="org.freedesktop.DBus.Introspectable">
+        <method name="Introspect">
+            <arg name="out" direction="out" type="s" />
+        </method>
+    </interface>
+</node>

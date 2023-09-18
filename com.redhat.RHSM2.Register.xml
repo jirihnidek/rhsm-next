@@ -1,0 +1,79 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+        "https://specifications.freedesktop.org/dbus/introspect-latest.dtd">
+<node>
+    <!--
+    com.redhat.RHSM2.Register
+    @short_description: Register object interface
+
+    The com.redhat.RHSM2.Consumer exposes methods for registering system
+    -->
+    <interface name="com.redhat.RHSM2.Register">
+        <!--
+        RegisterWithUsername
+        @org: The org ID
+        @username: The username
+        @password: The password
+        @options: Dictionary with options.
+        @locale: The string with locale
+
+        Try to register system using organization id, username and password.
+        Method returns string with JSON object representing new consumer.
+        This JSON is returned by candlepin server.
+        -->
+        <method name="RegisterWithUsername">
+            <arg name="org" direction="in" type="s" />
+            <arg name="username" direction="in" type="s" />
+            <arg name="password" direction="in" type="s" />
+            <arg name="options" direction="in" type="a{ss}" />
+            <arg name="locale" direction="in" type="s" />
+            <arg name="consumer" direction="in" type="s" />
+        </method>
+
+        <!--
+        RegisterWithActivationKey
+        @org: The org ID
+        @activation_keys: The list of activation keys
+        @options: Dictionary with options
+        @locale: The string with locale
+
+        Try to register system using organization id, and list of activation keys.
+        Method returns string with JSON object representing new consumer.
+        This JSON is returned by candlepin server.
+        -->
+        <method name="RegisterWithActivationKeys">
+            <arg name="org" direction="in" type="s" />
+            <arg name="activation_keys" direction="in" type="a{s}" />
+            <arg name="options" direction="in" type="a{ss}" />
+            <arg name="locale" direction="in" type="s" />
+            <arg name="consumer" direction="out" type="s" />
+        </method>
+
+        <!--
+        GetOrgs
+        @username: The username
+        @password: The password
+        @locale: The string with locale
+        @locale: The list of organizations
+
+        Try to get list of organizations in which is given user member of. It
+        is necessary to provide username to get this list of organizations.
+        Each organization in the list is represented as a string containing
+        JSON object of the organization.
+        -->
+        <method name="GetOrgs">
+            <arg name="username" direction="in" type="s" />
+            <arg name="password" direction="in" type="s" />
+            <arg name="locale" direction="in" type="s" />
+            <arg name="org_ids" direction="out" type="av" />
+        </method>
+    </interface>
+
+    <!--
+    Interface for introspection of D-Bus API
+    -->
+    <interface name="org.freedesktop.DBus.Introspectable">
+        <method name="Introspect">
+            <arg name="out" direction="out" type="s" />
+        </method>
+    </interface>
+</node>
