@@ -46,14 +46,14 @@ func (rhsm2Consumer *RHSM2Consumer) readConsumerData() error {
 	}
 
 	log.Debug().Msgf("reloading consumer certificate...")
-	consumerUUID, err := rhsmClient.GetConsumerUUID(nil)
+	consumerUUID, err := rhsmClient.GetConsumerUUID()
 	if err != nil {
 		rhsm2Consumer.uuid = ""
 	} else {
 		rhsm2Consumer.uuid = *consumerUUID
 	}
 
-	ownerId, err := rhsmClient.GetOwner(nil)
+	ownerId, err := rhsmClient.GetOwner()
 	if err != nil {
 		rhsm2Consumer.orgID = ""
 	} else {
