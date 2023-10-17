@@ -42,7 +42,7 @@ func handleWatcher(rhsm2Connection *RHSM2Consumer, watcher *fsnotify.Watcher, co
 			if !ok {
 				return nil
 			}
-			log.Error().Msgf("error:", err)
+			log.Error().Msgf("error: %s", err)
 		}
 	}
 }
