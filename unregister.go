@@ -28,7 +28,10 @@ func (rhsm2Unregister *RHSM2Unregister) Unregister(
 		return dbus.MakeFailedError(err)
 	}
 
-	err = rhsmClient.Unregister()
+	clientInfo := rhsm2.ClientInfo{}
+	clientInfo.Locale = locale
+	clientInfo.DBusSender = string(dbusSender) // TODO: get app name
+	err = rhsmClient.Unregister(&clientInfo)
 	if err != nil {
 		return dbus.MakeFailedError(err)
 	}

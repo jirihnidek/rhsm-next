@@ -4,6 +4,7 @@ import (
 	_ "embed"
 	"fmt"
 	"github.com/godbus/dbus/v5"
+	"github.com/jirihnidek/rhsm2"
 	"github.com/rs/zerolog/log"
 )
 
@@ -18,9 +19,11 @@ func main() {
 	defer func(conn *dbus.Conn) {
 		err := conn.Close()
 		if err != nil {
-			log.Error().Msgf("unable to cloe D-Bus connection: %v", err)
+			log.Error().Msgf("unable to close D-Bus connection: %v", err)
 		}
 	}(conn)
+
+	rhsm2.SetUserAgentCmd("rhsm2.service")
 
 	err = initConsumerInterface(conn)
 	if err != nil {

@@ -35,7 +35,10 @@ func (rhsm2Register *RHSM2Register) RegisterWithUsername(
 		return "", dbus.MakeFailedError(err)
 	}
 
-	consumerData, err := rhsmClient.RegisterUsernamePasswordOrg(&username, &password, &org)
+	clientInfo := rhsm2.ClientInfo{}
+	clientInfo.Locale = locale
+	clientInfo.DBusSender = string(dbusSender) // TODO: get app name
+	consumerData, err := rhsmClient.RegisterUsernamePasswordOrg(&username, &password, &org, &clientInfo)
 	if err != nil {
 		return "", dbus.MakeFailedError(err)
 	}
@@ -64,7 +67,10 @@ func (rhsm2Register *RHSM2Register) RegisterWithActivationKeys(
 		return "", dbus.MakeFailedError(err)
 	}
 
-	consumerData, err := rhsmClient.RegisterOrgActivationKeys(&org, activationKeys)
+	clientInfo := rhsm2.ClientInfo{}
+	clientInfo.Locale = locale
+	clientInfo.DBusSender = string(dbusSender) // TODO: get app name
+	consumerData, err := rhsmClient.RegisterOrgActivationKeys(&org, activationKeys, &clientInfo)
 	if err != nil {
 		return "", dbus.MakeFailedError(err)
 	}
@@ -94,7 +100,10 @@ func (rhsm2Register *RHSM2Register) GetOrgs(
 		return orgs, dbus.MakeFailedError(err)
 	}
 
-	organizations, err = rhsmClient.GetOrgs(username, password)
+	clientInfo := rhsm2.ClientInfo{}
+	clientInfo.Locale = locale
+	clientInfo.DBusSender = string(dbusSender) // TODO: get app name
+	organizations, err = rhsmClient.GetOrgs(username, password, &clientInfo)
 	if err != nil {
 		return orgs, dbus.MakeFailedError(err)
 	}
