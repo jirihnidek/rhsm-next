@@ -40,7 +40,7 @@ func (rhsm2Consumer *RHSM2Consumer) GetOrg(locale string, dbusSender dbus.Sender
 // readConsumerData tries to read data from consumer certificate
 // and set fields in rhsm2 structure
 func (rhsm2Consumer *RHSM2Consumer) readConsumerData() error {
-	rhsmClient, err := rhsm2.CreateRHSMClient(nil)
+	rhsmClient, err := rhsm2.GetRHSMClient(nil)
 	if err != nil {
 		return fmt.Errorf("unable to create rhsm client: %s", err)
 	}
