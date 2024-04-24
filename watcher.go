@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/fsnotify/fsnotify"
 	"github.com/godbus/dbus/v5"
 	"github.com/rs/zerolog/log"
@@ -9,11 +10,19 @@ import (
 // handleWatcher tries to handle watcher events
 func handleWatcher(rhsm2Connection *RHSM2Consumer, watcher *fsnotify.Watcher, conn *dbus.Conn) error {
 	for {
-		log.Debug().Msg("handling watcher events...")
+		watchList := watcher.WatchList()
+		if len(watchList) == 0 {
+			log.Warn().Msgf("empty watch list")
+		} else {
+			log.Debug().Msg("handling watcher events for directories:")
+			for idx, dirPath := range watchList {
+				log.Debug().Msgf("%d: %s", idx, dirPath)
+			}
+		}
 		select {
 		case event, ok := <-watcher.Events:
 			if !ok {
-				return nil
+				return fmt.Errorf("unable to get watcher event")
 			}
 			log.Debug().Msgf("event: %s, file: %s\n", event.Op.String(), event.Name)
 
@@ -40,7 +49,7 @@ func handleWatcher(rhsm2Connection *RHSM2Consumer, watcher *fsnotify.Watcher, co
 			}
 		case err, ok := <-watcher.Errors:
 			if !ok {
-				return nil
+				return fmt.Errorf("unable to get watcher error")
 			}
 			log.Error().Msgf("error: %s", err)
 		}
@@ -77,5 +86,6 @@ func initConsumerWatcher(conn *dbus.Conn, rhsm2Consumer *RHSM2Consumer) error {
 	if err != nil {
 		return err
 	}
+
 	return nil
 }
