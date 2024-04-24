@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/fsnotify/fsnotify v1.7.0
 	github.com/godbus/dbus/v5 v5.1.0
-	github.com/jirihnidek/rhsm2 v0.0.0-20240319150153-d8c35e19de7c
+	github.com/jirihnidek/rhsm2 v0.0.0-20240424135902-3305cdd26a04
 	github.com/rs/zerolog v1.32.0
 )
 
@@ -23,4 +23,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-//replace github.com/jirihnidek/rhsm2 => /home/jhnidek/github/jirihnidek/rhsm2
+replace github.com/jirihnidek/rhsm2 => /home/jhnidek/github/jirihnidek/rhsm2

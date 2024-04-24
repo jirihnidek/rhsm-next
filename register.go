@@ -30,7 +30,7 @@ func (rhsm2Register *RHSM2Register) RegisterWithUsername(
 	log.Debug().Msgf("RegisterWithUsername() called with arguments: org: %s, username: %s, password: %s, options: %s, locale: %s, sender: %s",
 		org, username, password, options, locale, dbusSender)
 
-	rhsmClient, err := rhsm2.CreateRHSMClient(nil)
+	rhsmClient, err := rhsm2.GetRHSMClient(nil)
 	if err != nil {
 		return "", dbus.MakeFailedError(err)
 	}
@@ -62,7 +62,7 @@ func (rhsm2Register *RHSM2Register) RegisterWithActivationKeys(
 	log.Debug().Msgf("RegisterWithActivationKeys() called with arguments: org: %s, activation_keys: %s, options: %s, locale: %s, sender: %s",
 		org, activationKeys, options, locale, dbusSender)
 
-	rhsmClient, err := rhsm2.CreateRHSMClient(nil)
+	rhsmClient, err := rhsm2.GetRHSMClient(nil)
 	if err != nil {
 		return "", dbus.MakeFailedError(err)
 	}
@@ -95,7 +95,7 @@ func (rhsm2Register *RHSM2Register) GetOrgs(
 	var orgs []string
 	var organizations []rhsm2.OrganizationData
 
-	rhsmClient, err := rhsm2.CreateRHSMClient(nil)
+	rhsmClient, err := rhsm2.GetRHSMClient(nil)
 	if err != nil {
 		return orgs, dbus.MakeFailedError(err)
 	}

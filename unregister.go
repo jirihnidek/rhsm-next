@@ -23,7 +23,7 @@ func (rhsm2Unregister *RHSM2Unregister) Unregister(
 	log.Debug().Msgf("Unregister() called with arguments: locale: %s, sender: %s",
 		locale, dbusSender)
 
-	rhsmClient, err := rhsm2.CreateRHSMClient(nil)
+	rhsmClient, err := rhsm2.GetRHSMClient(nil)
 	if err != nil {
 		return dbus.MakeFailedError(err)
 	}
