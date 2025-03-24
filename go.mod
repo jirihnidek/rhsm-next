@@ -6,7 +6,7 @@ require (
 	github.com/fsnotify/fsnotify v1.8.0
 	github.com/godbus/dbus/v5 v5.1.0
 	github.com/jirihnidek/rhsm2 v0.0.0-20240424135902-3305cdd26a04
-	github.com/rs/zerolog v1.33.0
+	github.com/rs/zerolog v1.34.0
 )
 
 require (
